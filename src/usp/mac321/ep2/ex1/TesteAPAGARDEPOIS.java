@@ -19,29 +19,24 @@ public class TesteAPAGARDEPOIS {
 		TiposDeDespesas = Leitor.leTiposDespesas("tiposDespesas.csv");
 		TiposDeReceitas = Leitor.leTiposReceitas("tiposReceitas.csv");
 		Lancamentos = Leitor.leLancamentos("lancamentos.csv");
-		System.out.println("-------------------------");
 		for (Usuario usuario : Usuarios) {
             System.out.println("Apelido: " + usuario.getApelido());
             System.out.println("Nome: " + usuario.getNome());
             System.out.println();
         }
-		System.out.println("-------------------------");
 		for (TipoDespesa tipodedespesa : TiposDeDespesas) {
             System.out.println("Categoria: " + tipodedespesa.getCategoria());
             System.out.println("Subcategoria: " + tipodedespesa.getSubcategoria());
             System.out.println();
         }
-		System.out.println("-------------------------");
 		for (TipoReceita tipodereceita : TiposDeReceitas) {
             System.out.println("Categoria: " + tipodereceita.getCategoria());
             System.out.println("Subcategoria: " + tipodereceita.getSubcategoria());
             System.out.println();
         }
-		System.out.println("-------------------------");
 		for (Lancamento lancamento : Lancamentos) {
             System.out.println(lancamento);
             System.out.println();
         }
-		System.out.println("-------------------------");
 	}
 }

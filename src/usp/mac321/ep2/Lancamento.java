@@ -39,6 +39,10 @@ public class Lancamento {
 		else return "Receita";
 	}
 	
+	public boolean getRD() {
+		return RD;
+	}
+	
 	public String getSubcategoria() {
 		return subcategoria;
 	}
