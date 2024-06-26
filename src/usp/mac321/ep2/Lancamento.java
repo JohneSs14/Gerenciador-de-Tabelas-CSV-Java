@@ -50,4 +50,16 @@ public class Lancamento {
 	public double getValor() {
 		return valor;
 	}
+	
+	@Override
+	public String toString() {
+	    return "Lancamento{" +
+	            "data='" + data + '\'' +
+	            ", usuario=" + usuario.getApelido() +
+	            ", isDespesa=" + RD +
+	            ", subcategoria='" + subcategoria + '\'' +
+	            ", valor=" + valor +
+	            ", descricao='" + descricao + '\'' +
+	            '}';
+	}
 }
