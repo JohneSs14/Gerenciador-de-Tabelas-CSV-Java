@@ -142,6 +142,9 @@ public class LeitorCSVFinancas implements LeitorFinancasPessoaisDAO {
 
 	            TipoDespesa tipoDespesa = findTipoDespesaBySubcategoria(EXPENSE_LIST, subcategoria);
 	            TipoReceita tipoReceita = findTipoReceitaBySubcategoria(REVENUE_LIST, subcategoria);
+	            if (tipoDespesa == null && tipoReceita == null) {
+	            	throw new IllegalArgumentException("Categoria não encontrada: " + subcategoria);
+	            }
 	            if ((isDespesa && tipoReceita!= null) || (!isDespesa && tipoDespesa!= null)) {
 	                throw new IllegalArgumentException("Categoria de receita/despesa incompatível: " + subcategoria);
 	            }
