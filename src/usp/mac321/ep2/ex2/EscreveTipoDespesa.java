@@ -1,0 +1,20 @@
+package usp.mac321.ep2.ex2;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+import usp.mac321.ep2.TipoDespesa;
+
+public class EscreveTipoDespesa implements TipoDespesaDAO {
+	@Override
+	public void escreveTiposDespesas(List<TipoDespesa> tiposDespesas, String endereço) {
+		try (FileWriter writer = new FileWriter("csv2/" + endereço)) {
+			for (TipoDespesa tipodespesa : tiposDespesas) {
+				writer.write(tipodespesa.getCategoria() + "," + tipodespesa.getSubcategoria() + "\n");
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+}
