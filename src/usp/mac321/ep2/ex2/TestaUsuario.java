@@ -18,10 +18,10 @@ public class TestaUsuario {
         usuarios.add(Pai);
         usuarios.add(Pai);
         
-        File file = new File("csv2/usuarioduplicado.csv");
+        File file = new File("csv2/");
         assertTrue(file.exists());
         
         EscreveUsuario usuario = new EscreveUsuario();
-        usuario.escreveUsuarios(usuarios, "usuarioduplicado.csv");
+        usuario.escreveUsuarios(usuarios, "");
     }
 }

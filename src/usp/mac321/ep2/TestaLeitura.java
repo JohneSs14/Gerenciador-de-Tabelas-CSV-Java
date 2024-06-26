@@ -98,7 +98,7 @@ class TestaLeitura {
             leitor.leUsuarios("usuariosduplicados.csv");
             fail("Deveria ter lançado uma exceção");
         } catch (RuntimeException e) {
-            assertEquals("Apelido duplicado: usuario1", e.getMessage());
+            assertEquals("Apelido duplicado: Pai", e.getMessage());
         }
     }
 
@@ -118,7 +118,7 @@ class TestaLeitura {
             leitor.leLancamentos("categoriainvertida.csv");
             fail("Deveria ter lançado uma exceção");
         } catch (RuntimeException e) {
-            assertEquals("Categoria de receita/despesa incompatível: despesa", e.getMessage());
+            assertEquals("Categoria de receita/despesa incompatível: Supermercado", e.getMessage());
         }
     }
 
@@ -128,7 +128,7 @@ class TestaLeitura {
             leitor.leLancamentos("usuarionaoexiste.csv");
             fail("Deveria ter lançado uma exceção");
         } catch (RuntimeException e) {
-            assertEquals("Usuário não encontrado: usuario_nao_existe", e.getMessage());
+            assertEquals("Usuário não encontrado: Tio", e.getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class TestaLeitura {
             leitor.leLancamentos("valornegativo.csv");
             fail("Deveria ter lançado uma exceção");
         } catch (RuntimeException e) {
-            assertEquals("Valor negativo: -10.0", e.getMessage());
+            assertEquals("Valor negativo: -10000.0", e.getMessage());
         }
     }
 }

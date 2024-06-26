@@ -11,7 +11,7 @@ public class EscreveLancamento implements LancamentoDAO {
     public void escreveLancamentos(List<Lancamento> lancamentos, String endereço) {
         try (FileWriter writer = new FileWriter("csv2/" + endereço)) {
             for (Lancamento lancamento : lancamentos) {
-                writer.write(lancamento.getIdentificador() + "," + lancamento.getData() + "," + lancamento.getUsuario() + "," + lancamento.getRD() + "," + lancamento.getSubcategoria() + "," + lancamento.getValor() + "," + lancamento.getDescricao() + "\n");
+                writer.write(lancamento.getIdentificador() + "," + lancamento.getData() + "," + lancamento.getUsuario().getApelido() + "," + lancamento.getRD() + "," + lancamento.getSubcategoria() + "," + lancamento.getValor() + "," + lancamento.getDescricao() + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

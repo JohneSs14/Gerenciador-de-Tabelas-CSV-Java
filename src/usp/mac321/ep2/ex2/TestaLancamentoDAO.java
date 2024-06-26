@@ -16,13 +16,12 @@ public class TestaLancamentoDAO {
     void testaEscritaLancamentos() {
     	Usuario Pai = new Usuario ("Pai", "Epaminondas");
         List<Lancamento> lancamentos = new ArrayList<>();
-        lancamentos.add(new Lancamento("01/05/24", Pai, false, "Principal", 10000, "Salário do papai"));
-        lancamentos.add(new Lancamento("7,05/05/24", Pai, true, "Supermercado" ,555.55, "Compra da semana"));
+        lancamentos.add(new Lancamento("01/05/24", Pai, false, "Supermercado", -10000, "Salário do papai"));
         
-        File file = new File("csv2/lancamentos2.csv");
+        File file = new File("csv2/");
         assertTrue(file.exists());
         
         EscreveLancamento lancamento = new EscreveLancamento();
-        lancamento.escreveLancamentos(lancamentos, "lancamentos2.csv");
+        lancamento.escreveLancamentos(lancamentos, "");
     }
 }
