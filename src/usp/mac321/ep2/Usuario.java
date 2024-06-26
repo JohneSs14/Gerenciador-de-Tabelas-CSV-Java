@@ -9,8 +9,16 @@ public class Usuario {
 		this.nome = nome;
 	}
 	
-    @Override
-    public String toString() {
-        return "Apelido: " + apelido + ", Nome: " + nome;
-    }
+	public String getApelido() {
+		return apelido;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	@Override
+	public String toString() {
+		return "Apelido: " + apelido + ", Nome: " + nome;
+	}
 }

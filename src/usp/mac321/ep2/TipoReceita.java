@@ -8,4 +8,17 @@ public class TipoReceita {
 		this.categoria = categoria;
 		this.subcategoria = subcategoria;
 	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public String getSubcategoria() {
+		return subcategoria;
+	}
+
+	@Override
+	public String toString() {
+		return "Categoria: " + categoria + ", Subcategoria: " + subcategoria;
+	}
 }

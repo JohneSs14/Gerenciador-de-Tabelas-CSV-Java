@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -25,27 +27,31 @@ public class LeitorCSVFinancas implements LeitorFinancasPessoaisDAO {
 
 	@Override
 	public List<Usuario> leUsuarios(String nomeArquivoUsuarios) {
-		List<Usuario> usuarios = new ArrayList<>();
-		try (CSVReader reader = new CSVReader(new FileReader(new File(CSV_PATH + nomeArquivoUsuarios)))) {
-			String[] nextLine;
-			while ((nextLine = reader.readNext()) != null) {
-				if (nextLine[0].equals("Apelido")) {
-					continue;
-				}
-				String apelido = nextLine[0];
-				String nome = nextLine[1];
-				Usuario usuario = new Usuario(apelido, nome);
-				usuarios.add(usuario);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CsvValidationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return usuarios;
+	    List<Usuario> usuarios = new ArrayList<>();
+	    Set<String> apelidos = new HashSet<>();
+	    try (CSVReader reader = new CSVReader(new FileReader(new File(CSV_PATH + nomeArquivoUsuarios)))) {
+	        String[] proximaLinha;
+	        while ((proximaLinha = reader.readNext()) != null) {
+	            if (proximaLinha[0].equals("Apelido")) {
+	                continue;
+	            }
+	            String apelido = proximaLinha[0];
+	            if (apelidos.contains(apelido)) {
+	                throw new IllegalArgumentException("Apelido duplicado: " + apelido);
+	            }
+	            apelidos.add(apelido);
+	            String nome = proximaLinha[1];
+	            Usuario usuario = new Usuario(apelido, nome);
+	            usuarios.add(usuario);
+	        }
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (CsvValidationException e) {
+	        e.printStackTrace();
+	    }
+	    return usuarios;
 	}
 
 	@Override

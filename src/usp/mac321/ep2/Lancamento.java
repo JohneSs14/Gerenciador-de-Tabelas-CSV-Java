@@ -9,8 +9,8 @@ public class Lancamento {
 	private String subcategoria;
 	private String descricao;
 	private double valor;
-	
-	public Lancamento (String data, Usuario usuario, boolean RD, String subcategoria, double valor, String descricao) {
+
+	public Lancamento(String data, Usuario usuario, boolean RD, String subcategoria, double valor, String descricao) {
 		this.data = data;
 		this.usuario = usuario;
 		this.RD = RD;
@@ -19,5 +19,35 @@ public class Lancamento {
 		this.descricao = descricao;
 		this.identificador = counter;
 		counter++;
+	}
+
+	public int getIdentificador() {
+		return identificador;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public String getCategoria() {
+		
+		if (RD == true) return "Despesa";
+		else return "Receita";
+	}
+	
+	public String getSubcategoria() {
+		return subcategoria;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public double getValor() {
+		return valor;
 	}
 }
