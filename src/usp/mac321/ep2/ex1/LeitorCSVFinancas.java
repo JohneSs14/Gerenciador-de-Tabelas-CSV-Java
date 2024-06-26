@@ -27,37 +27,55 @@ public class LeitorCSVFinancas implements LeitorFinancasPessoaisDAO {
 
 	@Override
 	public List<Usuario> leUsuarios(String nomeArquivoUsuarios) {
-	    List<Usuario> usuarios = new ArrayList<>();
-	    Set<String> apelidos = new HashSet<>();
-	    try (CSVReader reader = new CSVReader(new FileReader(new File(CSV_PATH + nomeArquivoUsuarios)))) {
-	        String[] proximaLinha;
-	        while ((proximaLinha = reader.readNext()) != null) {
-	            if (proximaLinha[0].equals("Apelido")) {
-	                continue;
-	            }
-	            String apelido = proximaLinha[0];
-	            if (apelidos.contains(apelido)) {
-	                throw new IllegalArgumentException("Apelido duplicado: " + apelido);
-	            }
-	            apelidos.add(apelido);
-	            String nome = proximaLinha[1];
-	            Usuario usuario = new Usuario(apelido, nome);
-	            usuarios.add(usuario);
-	        }
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    } catch (CsvValidationException e) {
-	        e.printStackTrace();
-	    }
-	    return usuarios;
+		List<Usuario> usuarios = new ArrayList<>();
+		Set<String> apelidos = new HashSet<>();
+		try (CSVReader reader = new CSVReader(new FileReader(new File(CSV_PATH + nomeArquivoUsuarios)))) {
+			String[] proximaLinha;
+			while ((proximaLinha = reader.readNext()) != null) {
+				if (proximaLinha[0].equals("Apelido")) {
+					continue;
+				}
+				String apelido = proximaLinha[0];
+				if (apelidos.contains(apelido)) {
+					throw new IllegalArgumentException("Apelido duplicado: " + apelido);
+				}
+				apelidos.add(apelido);
+				String nome = proximaLinha[1];
+				Usuario usuario = new Usuario(apelido, nome);
+				usuarios.add(usuario);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (CsvValidationException e) {
+			e.printStackTrace();
+		}
+		return usuarios;
 	}
 
 	@Override
 	public List<TipoDespesa> leTiposDespesas(String nomeArquivoTiposDespesas) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TipoDespesa> tiposdedespesas = new ArrayList<>();
+		try (CSVReader reader = new CSVReader(new FileReader(new File(CSV_PATH + nomeArquivoTiposDespesas)))) {
+			String[] proximaLinha;
+			while ((proximaLinha = reader.readNext()) != null) {
+				if (proximaLinha[0].equals("Categoria")) {
+					continue;
+				}
+				String categoria = proximaLinha[0];
+				String subcategoria = proximaLinha[1];
+				TipoDespesa TipoDespesa = new TipoDespesa(categoria, subcategoria);
+				tiposdedespesas.add(TipoDespesa);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (CsvValidationException e) {
+			e.printStackTrace();
+		}
+		return tiposdedespesas;
 	}
 
 	@Override
