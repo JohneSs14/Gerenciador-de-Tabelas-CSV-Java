@@ -81,4 +81,64 @@ class TestaLeitura {
             assertEquals("Categoria não encontrada: Salário", e.getMessage());
         }
     }
+    
+    @Test
+    public void testArquivoNaoEncontrado() {
+        try {
+            leitor.leUsuarios("arquivo_nao_existe.csv");
+            fail("Deveria ter lançado uma exceção");
+        } catch (RuntimeException e) {
+            assertEquals("Arquivo não encontrado: arquivo_nao_existe.csv", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testDoisUsuariosMesmoApelido() {
+        try {
+            leitor.leUsuarios("usuariosduplicados.csv");
+            fail("Deveria ter lançado uma exceção");
+        } catch (RuntimeException e) {
+            assertEquals("Apelido duplicado: usuario1", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testDoisLancamentosMesmoIdentificador() {
+        try {
+            leitor.leLancamentos("lancamentoduplicado.csv");
+            fail("Deveria ter lançado uma exceção");
+        } catch (RuntimeException e) {
+            assertEquals("Identificador duplicado: 1", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testLancamentoReceitaCategoriaDespesa() {
+        try {
+            leitor.leLancamentos("categoriainvertida.csv");
+            fail("Deveria ter lançado uma exceção");
+        } catch (RuntimeException e) {
+            assertEquals("Categoria de receita/despesa incompatível: despesa", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testLancamentoUsuarioNaoExiste() {
+        try {
+            leitor.leLancamentos("usuarionaoexiste.csv");
+            fail("Deveria ter lançado uma exceção");
+        } catch (RuntimeException e) {
+            assertEquals("Usuário não encontrado: usuario_nao_existe", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testLancamentoValorNegativo() {
+        try {
+            leitor.leLancamentos("valornegativo.csv");
+            fail("Deveria ter lançado uma exceção");
+        } catch (RuntimeException e) {
+            assertEquals("Valor negativo: -10.0", e.getMessage());
+        }
+    }
 }
