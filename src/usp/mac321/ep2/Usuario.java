@@ -8,4 +8,9 @@ public class Usuario {
 		this.apelido = apelido;
 		this.nome = nome;
 	}
+	
+    @Override
+    public String toString() {
+        return "Apelido: " + apelido + ", Nome: " + nome;
+    }
 }
