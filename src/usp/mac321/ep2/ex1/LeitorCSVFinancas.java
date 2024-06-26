@@ -80,8 +80,26 @@ public class LeitorCSVFinancas implements LeitorFinancasPessoaisDAO {
 
 	@Override
 	public List<TipoReceita> leTiposReceitas(String nomeArquivoTiposReceitas) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TipoReceita> tiposdereceitas = new ArrayList<>();
+		try (CSVReader reader = new CSVReader(new FileReader(new File(CSV_PATH + nomeArquivoTiposReceitas)))) {
+			String[] proximaLinha;
+			while ((proximaLinha = reader.readNext()) != null) {
+				if (proximaLinha[0].equals("Categoria")) {
+					continue;
+				}
+				String categoria = proximaLinha[0];
+				String subcategoria = proximaLinha[1];
+				TipoReceita TipoReceita = new TipoReceita(categoria, subcategoria);
+				tiposdereceitas.add(TipoReceita);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (CsvValidationException e) {
+			e.printStackTrace();
+		}
+		return tiposdereceitas;
 	}
 
 	@Override
