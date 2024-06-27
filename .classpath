@@ -8,10 +8,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="opencsv-5.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/andre/Desktop/Usp/MAC0321/MAC_EP_2/EP2-main/EP2-main/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/andre/Desktop/Usp/MAC0321/MAC_EP_2/EP2-main/EP2-main/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/andre/Desktop/Usp/MAC0321/MAC_EP_2/EP2-main/EP2-main/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/andre/Desktop/Usp/MAC0321/MAC_EP_2/EP2-main/EP2-main/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-tests.jar"/>
-	<classpathentry kind="lib" path="C:/Users/andre/Desktop/Usp/MAC0321/MAC_EP_2/EP2-main/EP2-main/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-test-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse Workspace/EP2_14558565_14582802/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse Workspace/EP2_14558565_14582802/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse Workspace/EP2_14558565_14582802/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse Workspace/EP2_14558565_14582802/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-tests.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse Workspace/EP2_14558565_14582802/commons-lang3-3.14.0-bin/commons-lang3-3.14.0/commons-lang3-3.14.0-test-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

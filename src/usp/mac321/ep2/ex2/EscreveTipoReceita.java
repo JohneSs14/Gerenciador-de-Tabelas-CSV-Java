@@ -9,7 +9,7 @@ import usp.mac321.ep2.TipoReceita;
 public class EscreveTipoReceita implements TipoReceitaDAO {
 	@Override
 	public void escreveTiposReceitas(List<TipoReceita> tiposReceitas, TipoReceita tipoReceitaAdicional, String endereço, String CSV_PATH) {
-		tiposReceitas.add(tipoReceitaAdicional);
+		if (tipoReceitaAdicional != null) tiposReceitas.add(tipoReceitaAdicional);
 		try (FileWriter writer = new FileWriter(CSV_PATH + endereço)) {
 			for (TipoReceita tiporeceita : tiposReceitas) {
 				writer.write(tiporeceita.getCategoria() + "," + tiporeceita.getSubcategoria() + "\n");
