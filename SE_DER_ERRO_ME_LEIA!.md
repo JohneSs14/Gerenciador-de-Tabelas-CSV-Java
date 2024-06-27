@@ -1,0 +1,2 @@
+Se quando você for testar, der algum erro relacionado ao OPENCSV, tente abrir o buildpath e adicionar ao classpath os externaljars contidos no arquivo "commons-lang3-3.14.0-bin". Isso resolverá os problemas e todos os testes ficarão verdinhos!<br/>
+Muito obrigado pelas aulas, Finger. Foi um prazer ter aula com você e a monitoria do Miguel. Vou sentir falta das suas histórias, desabafos e comentários engraçados. Aprendi bastante com a sua matéria e espero ter conseguido demonstrar ao menos um pouco disso nesse EP. Até a próxima!<br/>

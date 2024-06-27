@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.opencsv.exceptions.CsvValidationException;
 
@@ -114,5 +116,107 @@ public class Gerenciador {
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao computar valor total", e);
 		}
+	}
+
+	public void computarValorAgregadoCategoria(String dataInicio, String dataFim, String categoria) {
+		leitor = new LeitorCSVFinancas(csvPath, "ArquivoUsuarioGerador.csv", "ArquivoTiposDespesasGerador.csv",
+				"ArquivoTiposReceitasGerador.csv", "ArquivoLancamentosGerador.csv");
+		try {
+			List<Lancamento> lancamentos = leitor.leLancamentos("ArquivoLancamentosGerador.csv");
+			List<TipoDespesa> tipoDespesas = leitor.leTiposDespesas("ArquivoTiposDespesasGerador.csv");
+			List<TipoReceita> tipoReceitas = leitor.leTiposReceitas("ArquivoTiposReceitasGerador.csv");
+
+			double valorAgregado = 0;
+			for (Lancamento lancamento : lancamentos) {
+				if (lancamento.getData().compareTo(dataInicio) >= 0 && lancamento.getData().compareTo(dataFim) <= 0) {
+					String subcategoria = lancamento.getSubcategoria();
+					for (TipoDespesa tipoDespesa : tipoDespesas) {
+						if (tipoDespesa.getSubcategoria().equals(subcategoria)
+								&& tipoDespesa.getCategoria().equals(categoria)) {
+							valorAgregado += lancamento.getValor();
+							break;
+						}
+					}
+					for (TipoReceita tipoReceita : tipoReceitas) {
+						if (tipoReceita.getSubcategoria().equals(subcategoria)
+								&& tipoReceita.getCategoria().equals(categoria)) {
+							valorAgregado += lancamento.getValor();
+							break;
+						}
+					}
+				}
+			}
+			System.out.println("Valor agregado entre " + dataInicio + " e " + dataFim + " para a categoria " + categoria
+					+ ": " + valorAgregado);
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao computar valor agregado", e);
+		}
+	}
+
+	public void computarValorAgregadoSubCategoria(String dataInicio, String dataFim, String tipo) {
+		leitor = new LeitorCSVFinancas(csvPath, "ArquivoUsuarioGerador.csv", "ArquivoTiposDespesasGerador.csv",
+				"ArquivoTiposReceitasGerador.csv", "ArquivoLancamentosGerador.csv");
+		try {
+			List<Lancamento> lancamentos = leitor.leLancamentos("ArquivoLancamentosGerador.csv");
+
+			double valorAgregado = 0;
+			for (Lancamento lancamento : lancamentos) {
+				if (lancamento.getData().compareTo(dataInicio) >= 0 && lancamento.getData().compareTo(dataFim) <= 0) {
+					if (lancamento.getSubcategoria().equals(tipo)) {
+						valorAgregado += lancamento.getValor();
+					}
+				}
+			}
+			System.out.println("Valor agregado entre " + dataInicio + " e " + dataFim + " para a subcategoria " + tipo + ": "
+					+ valorAgregado);
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao computar valor agregado", e);
+		}
+	}
+
+	public void imprimirRelatorioFinanceiro(String dataInicio, String dataFim) {
+		System.out.println("Relatório Financeiro entre " + dataInicio + " e " + dataFim);
+
+		computarValorTotal(dataInicio, dataFim);
+
+		System.out.println("Receitas:");
+	    List<TipoReceita> tipoReceitas = leitor.leTiposReceitas("ArquivoTiposReceitasGerador.csv");
+	    Set<String> processedCategories = new HashSet<>();
+	    for (TipoReceita tipoReceita : tipoReceitas) {
+	        String categoria = tipoReceita.getCategoria();
+	        if (!processedCategories.contains(categoria)) {
+	            System.out.println("Categoria: " + categoria);
+	            computarValorAgregadoCategoria(dataInicio, dataFim, categoria);
+	            Set<String> processedSubcategories = new HashSet<>();
+	            for (TipoReceita subcategoria : tipoReceitas) {
+	                if (subcategoria.getCategoria().equals(categoria) && !processedSubcategories.contains(subcategoria.getSubcategoria())) {
+	                    System.out.println("  Subcategoria: " + subcategoria.getSubcategoria());
+	                    computarValorAgregadoSubCategoria(dataInicio, dataFim, subcategoria.getSubcategoria());
+	                    processedSubcategories.add(subcategoria.getSubcategoria());
+	                }
+	            }
+	            processedCategories.add(categoria);
+	        }
+	    }
+
+	    System.out.println("Despesas:");
+	    List<TipoDespesa> tipoDespesas = leitor.leTiposDespesas("ArquivoTiposDespesasGerador.csv");
+	    processedCategories.clear();
+	    for (TipoDespesa tipoDespesa : tipoDespesas) {
+	        String categoria = tipoDespesa.getCategoria();
+	        if (!processedCategories.contains(categoria)) {
+	            System.out.println("Categoria: " + categoria);
+	            computarValorAgregadoCategoria(dataInicio, dataFim, categoria);
+	            Set<String> processedSubcategories = new HashSet<>();
+	            for (TipoDespesa subcategoria : tipoDespesas) {
+	                if (subcategoria.getCategoria().equals(categoria) && !processedSubcategories.contains(subcategoria.getSubcategoria())) {
+	                    System.out.println("  Subcategoria: " + subcategoria.getSubcategoria());
+	                    computarValorAgregadoSubCategoria(dataInicio, dataFim, subcategoria.getSubcategoria());
+	                    processedSubcategories.add(subcategoria.getSubcategoria());
+	                }
+	            }
+	            processedCategories.add(categoria);
+	        }
+	    }
 	}
 }
