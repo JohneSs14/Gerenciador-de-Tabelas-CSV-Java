@@ -5,5 +5,5 @@ import java.util.List;
 import usp.mac321.ep2.Usuario;
 
 public interface UsuarioDAO {
-    void escreveUsuarios(List<Usuario> usuarios, String endereço);
+    void escreveUsuarios(List<Usuario> usuarios, Usuario usuarioAdicional, String endereço, String CSV_PATH);
 }
