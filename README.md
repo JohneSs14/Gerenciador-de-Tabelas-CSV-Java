@@ -1,0 +1,1 @@
+Neste projeto, foi programado um gerenciador de tabelas csv utilizando da linguagem JAVA. Ao longo da execução, foi possível trabalhar com a aplicação de funções base da linguagem e com a interpretação e utilização de bibliotecas externas.
